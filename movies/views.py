@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Movie
+from django.http import HttpResponse
 
 
 def intro(request):
@@ -32,18 +33,22 @@ def get_all_movies(request):
             }
     return render(request, 'movies/all-movies.html', data)
 
-    def create(request):
+def create(request):
 
-        movies = Movie(title='my Movie', synopsys='Something There',
-                       release_year='1989', duration=180)
-        movies.save()
+    movies = Movie(title='my Movie', synopsys='Something There',
+                    release_year='1989', duration=180)
+    movies.save()
 
-        data = {'movies': movies}
-        return render(request, 'movies/create.html', data)
+    data = {'movies': movies}
+    return render(request, 'movies/create.html', data)
 
-    def read(request):
+def read(request):
 
-        movies = Movie.objects.all()
-        data = {'movies': movies}
+    movies = Movie.objects.all()
+    data = {'movies': movies}
 
-        return render(request, 'movies/read.html', data)
+    return render(request, 'movies/read.html', data)
+
+
+def edit(request):
+    return  HttpResponse('This is Edit!')
